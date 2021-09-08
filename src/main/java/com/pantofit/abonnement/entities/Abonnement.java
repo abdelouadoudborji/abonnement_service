@@ -23,12 +23,12 @@ public class Abonnement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 75)
-    private String Code;
+    private String code;
     @ManyToOne
     private Plan plan;
     private int nbrseancerestants;
     private boolean courant;
-    private Long ClientID;
+    private Long clientID;
     @Transient
     private Client client;
 
