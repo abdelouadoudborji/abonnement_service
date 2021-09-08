@@ -13,9 +13,9 @@ AbonnementRepository abonnementRepository;
 public AbonnementController(AbonnementRepository abonnementRepository){
     this.abonnementRepository=abonnementRepository;
 }
-@GetMapping(path="/getAbonnement/{code}")
-    public  Long getAbonnement(@PathVariable(name="code") String code){
-    Abonnement abonnement=this.abonnementRepository.findAbonnementByCode(code);
+@GetMapping(path="/getAbonnement/{id}")
+    public  Long getAbonnement(@PathVariable(name="id") Long code){
+    Abonnement abonnement=this.abonnementRepository.findAbonnementByClientIDAndCourant(code,true);
     if(abonnement!=null){
         System.out.println(abonnement.getId());
         return abonnement.getId();

@@ -6,6 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface AbonnementRepository extends JpaRepository<Abonnement,Long> {
-    Abonnement findAbonnementByCode(String code);
+    Abonnement findAbonnementByClientIDAndCourant(Long id,boolean courant);
 
 }
