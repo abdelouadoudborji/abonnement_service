@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class Client {
     private Long id;
-    private String Code;
+    private String code;
     private String first_name;
     private String last_name;
     private Date birthday;
