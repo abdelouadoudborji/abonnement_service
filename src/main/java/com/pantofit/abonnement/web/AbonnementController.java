@@ -3,10 +3,12 @@ package com.pantofit.abonnement.web;
 
 import com.pantofit.abonnement.dao.AbonnementRepository;
 import com.pantofit.abonnement.entities.Abonnement;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.pantofit.abonnement.model.Client;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Map;
 @RestController
 public class AbonnementController {
 AbonnementRepository abonnementRepository;
@@ -24,8 +26,18 @@ public AbonnementController(AbonnementRepository abonnementRepository){
         return 0L;
 
     }
-
-
 }
+     @GetMapping(path="/solde/{id}")
+    public int SoldeRestant(@PathVariable(name="id") Long id){
+        Abonnement abonnement=this.abonnementRepository.findAbonnementByClientIDAndCourant(id,true);
+        if(abonnement!=null){
+            return abonnement.getNbrseancerestants();
+        }
+        else{
+            return 0;
+
+        }
+
+    }
 
 }
