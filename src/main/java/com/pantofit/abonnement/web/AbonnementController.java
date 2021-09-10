@@ -35,9 +35,11 @@ public class AbonnementController {
         if(abonnement!=null){
             if( abonnement.getNbrseancerestants()>1){
                 abonnement.setNbrseancerestants(abonnement.getNbrseancerestants()-1);
+                abonnementRepository.save(abonnement);
             }else {
                 abonnement.setNbrseancerestants(abonnement.getNbrseancerestants()-1);
                 abonnement.setCourant(false);
+                 abonnementRepository.save(abonnement);
             }
             return true;
         }
