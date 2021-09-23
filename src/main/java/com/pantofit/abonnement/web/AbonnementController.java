@@ -29,6 +29,23 @@ public class AbonnementController {
 
 
     }
+    @GetMapping (path="/subscribe/{m}/{id}")
+    public boolean subcribe(@PathVariable(name="m") Long Montant,@PathVariable(name="id") Long id)
+    {
+        Abonnement abonnementt=this.abonnementRepository.findAbonnementByClientIDAndCourant(id,true);
+        if(abonnementt==null) {
+            Plan plan = planRepository.findPlanByMontant(Montant);
+            Abonnement abonnement = new Abonnement();
+            abonnement.setCourant(true);
+            abonnement.setNbrseancerestants(plan.getNbrticket());
+            abonnement.setClientID(id);
+            abonnement.setPlan(plan);
+            abonnementRepository.save(abonnement);
+            return true;
+        }
+        return false;
+
+    }
     @GetMapping (path="/workout/{id}")
     public  boolean checkabonnement(@PathVariable(name="id") Long id){
         Abonnement abonnement=this.abonnementRepository.findAbonnementByClientIDAndCourant(id,true);
