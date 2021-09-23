@@ -1,10 +1,16 @@
 package com.pantofit.abonnement.web;
 
 import com.pantofit.abonnement.dao.AbonnementRepository;
+import com.pantofit.abonnement.dao.PlanRepository;
 import com.pantofit.abonnement.entities.Abonnement;
+import com.pantofit.abonnement.entities.Plan;
 import com.pantofit.abonnement.model.Client;
+import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -12,8 +18,12 @@ import java.util.Map;
 @RestController
 public class AbonnementController {
     private AbonnementRepository abonnementRepository;
-    public AbonnementController(AbonnementRepository abonnementRepository){
+    private KeycloakRestTemplate keycloakRestTemplate;
+    private PlanRepository planRepository;
+    public AbonnementController(AbonnementRepository abonnementRepository, KeycloakRestTemplate keycloakRestTemplate, PlanRepository planRepository){
         this.abonnementRepository=abonnementRepository;
+        this.keycloakRestTemplate=keycloakRestTemplate;
+        this.planRepository=planRepository;
     }
     @GetMapping(path="/getAbonnement/{id}")
     public  Long getAbonnement(@PathVariable(name="id") Long code){
